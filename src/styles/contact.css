@@ -1,0 +1,108 @@
+/* Import the Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Apply Poppins font to entire body of the component */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Contact Container */
+.contact-container {
+  display: flex;
+  flex-direction: row; /* Align side by side */
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 60vh; /* Use min-height instead of height to avoid extra space */
+  background-color: #0d1117;
+  padding: 20px;
+  color: white;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins to contact container */
+}
+
+/* Left section (heading and contact info) */
+.contact-left {
+  max-width: 40%;
+  padding-right: 20px; /* Add spacing between form and heading */
+}
+
+/* Contact Heading */
+.contact-heading h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #8e8e8e; /* Greyish color */
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Contact Info (Email and Phone) */
+.contact-info {
+  font-size: 1.2rem;
+  color: #bfbfbf; /* Slightly lighter color */
+  margin-bottom: 40px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+/* Contact Form */
+.contact-right {
+  max-width: 50%;
+  width: 100%;
+}
+
+.contact-form {
+  width: 100%;
+}
+
+/* Ant Design Form Input Customization */
+.ant-form-item-label > label {
+  color: white !important; /* Force label text to white */
+  font-family: 'Poppins', sans-serif;
+}
+
+.ant-input, .ant-input-textarea {
+  background-color: #161b22; /* Dark input background */
+  border-color: #9333ea; /* Same purple border as Future component */
+  color: white; /* White text color */
+  font-family: 'Poppins', sans-serif;
+}
+
+.ant-input:hover, .ant-input-textarea:hover {
+  border-color: #c084fc; /* Light purple border on hover */
+}
+
+.ant-btn-primary {
+  background-color: #9333ea;
+  border-color: #9333ea;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ant-btn-primary:hover {
+  background-color: #c084fc;
+  border-color: #c084fc;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-heading h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .contact-right, .contact-left {
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+}

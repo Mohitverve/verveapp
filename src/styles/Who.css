@@ -1,0 +1,87 @@
+.card-section {
+    position: relative;
+    width: 100%; /* Full width */
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflowing content */
+    background-color: #fff; /* White theme */
+    padding: 40px;
+  }
+  
+  .card-grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Style for individual cards */
+  .person-card {
+    width: 240px;
+    height: 300px;
+    border-radius: 10px;
+    position: absolute;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .person-card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  /* First Row */
+  .person-card-0 {
+    top: 0;
+    left: -30%;
+    transform: rotate(-10deg);
+  }
+  
+  .person-card-1 {
+    top: 50px;
+    left: 10%;
+    transform: rotate(0deg);
+  }
+  
+  .person-card-2 {
+    top: 100px;
+    left: 70%;
+    transform: rotate(10deg);
+  }
+  
+  /* Second Row */
+  .person-card-3 {
+    top: 350px;
+    left: -20%;
+    transform: rotate(-10deg);
+  }
+  
+  .person-card-4 {
+    top: 400px;
+    left: 10%;
+    transform: rotate(0deg);
+  }
+  
+  .person-card-5 {
+    top: 450px;
+    left: 70%;
+    transform: rotate(10deg);
+  }
+  
+  /* Third Row */
+  .person-card-6 {
+    top: 700px;
+    left: -10%;
+    transform: rotate(-10deg);
+  }
+  
+  .person-card-7 {
+    top: 750px;
+    left: 50%;
+    transform: rotate(0deg);
+  }
+  
+  .person-card-8 {
+    top: 800px;
+    left: 70%;
+    transform: rotate(10deg);
+  }
+  

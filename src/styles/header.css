@@ -1,0 +1,44 @@
+.app-header {
+    background: linear-gradient(135deg, #ffffff, #313232);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+   
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center; /* Align the logo vertically */
+  }
+  
+  .logo-image {
+    height: 100px; /* Adjust height as needed */
+    margin-right: 20px;
+  }
+  
+  .menu-items {
+    background: transparent;
+    border-bottom: none;
+  }
+  
+  .menu-items .ant-menu-item {
+    color: #fff;
+  }
+  
+  .menu-items .ant-menu-item:hover {
+    color: #0f3350;
+  }
+  
+  @media (max-width: 768px) {
+    .app-header {
+      padding: 0 20px;
+    }
+    .logo {
+      font-size: 1.5rem;
+    }
+  }
+  
