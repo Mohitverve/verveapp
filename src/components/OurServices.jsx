@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, Typography } from 'antd';
 import { HomeOutlined, CodeOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { motion } from 'framer-motion';
 import '../styles/services.css';
 import OrbitalCircles from './OrbitalCircles';
 
@@ -9,18 +10,18 @@ const { Title } = Typography;
 
 const services = [
   {
-    title: 'Service One',
-    description: 'Detailed description of Service One goes here. It provides amazing benefits.',
+    title: 'V-Class',
+    description: 'Now revolutionise the future of classrooms VR, Book a V-class today.',
     icon: <HomeOutlined />,
   },
   {
-    title: 'Service Two',
-    description: 'Detailed description of Service Two goes here. It offers unique features.',
+    title: 'V-Book',
+    description: 'Our high quality Virtual Reality content comprised in one single application.',
     icon: <CodeOutlined />,
   },
   {
-    title: 'Service Three',
-    description: 'Detailed description of Service Three goes here. It includes various options.',
+    title: 'Delivery Partner Program',
+    description: 'Our special program to facilitate smooth delivery of VR tests. Join us for a minimum fee.',
     icon: <UsergroupAddOutlined />,
   },
 ];
@@ -34,22 +35,34 @@ const OurServices = () => {
         </div>
       </div>
       <div className="our-services-container">
-        <Title level={2} className="services-heading">
-          Our Services
-        </Title>
+        <motion.h1
+          className="services-heading"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Our services
+        </motion.h1>
         <Row gutter={[16, 16]} justify="center">
           {services.map((service, index) => (
             <Col xs={24} sm={12} md={8} lg={6} key={index}>
-              <Card
-                bordered={false}
-                className="service-card"
-                cover={<div className="service-icon">{service.icon}</div>}
+              <motion.div
+                className="stacked-card"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
               >
-                <Meta
-                  title={<div className="service-title">{service.title}</div>}
-                  description={<div className="service-description">{service.description}</div>}
-                />
-              </Card>
+                <Card
+                  bordered={false}
+                  className="service-card"
+                  cover={<div className="service-icon">{service.icon}</div>}
+                >
+                  <Meta
+                    title={<div className="service-title">{service.title}</div>}
+                    description={<div className="service-description">{service.description}</div>}
+                  />
+                </Card>
+              </motion.div>
             </Col>
           ))}
         </Row>

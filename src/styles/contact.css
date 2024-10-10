@@ -1,79 +1,86 @@
-/* Import the Poppins font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-/* Apply Poppins font to entire body of the component */
-body {
-  font-family: 'Poppins', sans-serif;
-}
-
 /* Contact Container */
 .contact-container {
+  position: relative;
   display: flex;
-  flex-direction: row; /* Align side by side */
-  justify-content: space-between;
-  align-items: flex-start;
-  min-height: 60vh; /* Use min-height instead of height to avoid extra space */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   background-color: #0d1117;
-  padding: 20px;
+  padding: 40px 20px;
   color: white;
-  font-family: 'Poppins', sans-serif; /* Apply Poppins to contact container */
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
 }
 
-/* Left section (heading and contact info) */
-.contact-left {
-  max-width: 40%;
-  padding-right: 20px; /* Add spacing between form and heading */
+.dotted-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(#8e8e8e 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
 }
 
-/* Contact Heading */
+.contact-content {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  width: 100%;
+}
+
 .contact-heading h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: #8e8e8e; /* Greyish color */
+  color: #8e8e8e;
   margin-bottom: 20px;
   background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  font-family: 'Poppins', sans-serif;
+  text-align: center;
 }
 
-/* Contact Info (Email and Phone) */
 .contact-info {
-  font-size: 1.2rem;
-  color: #bfbfbf; /* Slightly lighter color */
+  font-size: 1rem;
+  color: #bfbfbf;
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .contact-info p {
   margin: 5px 0;
 }
 
-/* Contact Form */
-.contact-right {
-  max-width: 50%;
-  width: 100%;
-}
-
 .contact-form {
   width: 100%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Ant Design Form Input Customization */
 .ant-form-item-label > label {
-  color: white !important; /* Force label text to white */
+  color: #8e8e8e !important;
+  font-weight: 600;
+  margin-bottom: 5px;
   font-family: 'Poppins', sans-serif;
 }
 
 .ant-input, .ant-input-textarea {
-  background-color: #161b22; /* Dark input background */
-  border-color: #9333ea; /* Same purple border as Future component */
-  color: white; /* White text color */
+  background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
+  border-color: #9333ea;
+  color: rgb(0, 0, 0);
   font-family: 'Poppins', sans-serif;
+  padding: 10px 15px;
+  border-radius: 8px;
 }
 
 .ant-input:hover, .ant-input-textarea:hover {
-  border-color: #c084fc; /* Light purple border on hover */
+  border-color: #c084fc;
 }
 
 .ant-btn-primary {
@@ -81,6 +88,10 @@ body {
   border-color: #9333ea;
   color: white;
   font-family: 'Poppins', sans-serif;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
 }
 
 .ant-btn-primary:hover {
@@ -88,20 +99,22 @@ body {
   border-color: #c084fc;
 }
 
+/* Adjust input and button sizes */
+.ant-input {
+  height: 40px;
+}
+
+.ant-input-textarea {
+  min-height: 120px;
+}
+
 /* Responsive Layout */
 @media (max-width: 768px) {
-  .contact-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .contact-heading h1 {
     font-size: 2.5rem;
-    text-align: center;
   }
 
-  .contact-right, .contact-left {
-    max-width: 100%;
+  .contact-form, .contact-info {
     width: 100%;
     text-align: center;
   }

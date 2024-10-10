@@ -1,0 +1,142 @@
+/* Importing Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif; /* Applying Poppins to all elements */
+}
+
+.admin-dashboard {
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
+  margin-top: 20px;
+  margin-bottom: 10px; /* Fade-in animation */
+}
+
+.dashboard-header {
+  margin-bottom: 40px;
+  font-size: 2.4rem;
+  font-weight: 700; /* Bold for stronger emphasis */
+  color: #2d3748;
+  text-align: center;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+  letter-spacing: 1px; /* Slight letter spacing for readability */
+  animation: slideInDown 0.5s ease-out; /* Slide-in animation */
+}
+
+.ant-card {
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  margin-bottom: 30px;
+  background-color: #f9fafb;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.ant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: #e8f5ff; /* Light blue background on hover */
+}
+
+.ant-table {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  animation: fadeInUp 0.5s ease-in-out; /* Table fade-in effect */
+}
+
+.ant-table-header {
+  background-color: #edf2f7;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.ant-table-tbody > tr > td {
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #4a5568;
+  transition: background-color 0.3s ease;
+}
+
+.ant-table-tbody > tr:hover {
+  background-color: #f0f4f8; /* Highlight row on hover */
+}
+
+.ant-modal {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: zoomIn 0.4s ease; /* Modal zoom-in effect */
+}
+
+.ant-modal-header {
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600; /* Bold modal header text */
+}
+
+.ant-form-item-label > label {
+  font-weight: 600; /* Increased weight for form labels */
+  color: #2d3748;
+}
+
+.ant-input {
+  border-radius: 6px;
+  border: 1px solid #cbd5e0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.ant-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.3);
+}
+
+.game{
+  margin-top: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 20px;
+  }
+
+  .dashboard-header {
+    font-size: 1.8rem;
+  }
+
+  .ant-card {
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: 10px;
+  }
+}

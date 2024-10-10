@@ -13,24 +13,21 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <div className="contact-left">
-        {/* Contact Heading */}
+      <div className="dotted-background"></div>
+      <div className="contact-content">
         <div className="contact-heading">
           <h1>Contact Us</h1>
-          {/* Email and Phone Section */}
           <div className="contact-info">
-            <p>Email: info@verve.com</p>
-            <p>Phone: +91-1234567890</p>
+            <p>Email: support@verveuni.com</p>
+            <p>Phone: +91-9315941574</p>
           </div>
         </div>
-      </div>
-      <div className="contact-right">
-        {/* Contact Form */}
         <Form
           name="contact"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           className="contact-form"
+          layout="vertical"
         >
           <Form.Item
             label="Name"

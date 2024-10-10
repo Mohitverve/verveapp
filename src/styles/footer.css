@@ -1,7 +1,6 @@
-/* src/components/Footer.css */
 .footer {
-  background: linear-gradient(135deg, #000000, #434343);
-  color: #fff;
+  background-color: #0d1117;
+  color: #b3b3b3; /* Greyish color */
   padding: 20px;
   text-align: center;
 }
@@ -16,10 +15,11 @@
 .footer-links, .footer-social {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .footer-link {
-  color: #fff;
+  color: #b3b3b3; /* Greyish color */
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s ease;
@@ -34,7 +34,7 @@
 }
 
 .footer-social-icon {
-  color: #fff;
+  color: #b3b3b3;
   font-size: 20px;
   transition: color 0.3s ease;
 }
@@ -48,5 +48,23 @@
   .footer-content {
     flex-direction: column;
     align-items: center;
+  }
+
+  .footer-links {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-link {
+    font-size: 14px; /* Smaller font size for mobile screens */
+  }
+
+  .footer-social-icon {
+    font-size: 18px; /* Slightly smaller icons for smaller screens */
+  }
+
+  .footer-content {
+    padding: 10px; /* Reduce padding on mobile */
   }
 }

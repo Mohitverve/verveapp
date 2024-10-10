@@ -1,135 +1,140 @@
-/* VR Container */
 .vr-container {
-    display: flex;
-    justify-content: flex-start; /* Align content side by side */
-    align-items: center;
-    height: 100vh;
-    background-color: #0d1117;
-    padding: 20px;
-    color: white;
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  min-height: 100vh;
+  background-color: #0d1117;
+  padding: 20px 20px 20px 60px;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar-container {
+  position: absolute;
+  top: 10%;
+  left: 20px;
+  width: 4px;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+
+.progress-bar-vertical {
+  width: 100%;
+  background-color: #9333ea;
+  box-shadow: 0 0 10px #9333ea, 0 0 20px #9333ea;
+  transition: height 0.2s ease-out;
+  position: absolute;
+  top: 0;
+  height: 0%;
+}
+
+.vr-content {
+  max-width: 600px;
+  z-index: 1;
+}
+
+.vr-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(147, 51, 234, 0.5) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    to right,
+    rgba(147, 51, 234, 0.5) 1px,
+    transparent 1px
+  );
+  background-size: 50px 50px;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+/* ... (previous CSS remains the same) ... */
+
+.vr-buttons {
+  margin-top: 20px;
+}
+
+.vr-signup {
+  width: 80%;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #9333ea, #4f46e5);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.vr-signup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.4s ease;
+}
+
+.vr-signup:hover::before {
+  left: 100%;
+}
+
+.vr-signup:hover {
+  box-shadow: 0 0 15px rgba(37, 37, 38, 0.5);
+}
+
+/* ... (rest of the CSS remains the same) ... */
+
+@media (max-width: 768px) {
+  .vr-container {
+    padding: 20px 20px 20px 40px;
+    flex-direction: column;
+    justify-content: center;
   }
-  
-  .vr-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 50%; /* Adjust the width based on how much of the component you want covered */
-    background-image: linear-gradient(
-      to bottom,
-      rgba(147, 51, 234, 0.5) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to right,
-      rgba(147, 51, 234, 0.5) 1px,
-      transparent 1px
-    );
-    background-size: 50px 50px; /* Control grid spacing */
-    z-index: 0; /* Behind the content */
-    opacity: 0.2; /* Make the grid lines subtle */
+
+  .progress-bar-container {
+    left: 10px;
+    height: 70vh;
+    top: 15%;
   }
-  
-  .progress-bar-vertical {
-    position: relative; /* Not absolute anymore, for side-by-side layout */
-    margin-right: 20px;
-    width: 4px;
-    background-color: #9333ea;
-    box-shadow: 0 0 10px #9333ea, 0 0 20px #9333ea;
-    transition: height 0.2s ease-in-out;
-    height: 30%; /* Initial smaller height */
-  }
-  
-  /* VR Content */
+
   .vr-content {
-    max-width: 600px;
-    text-align: left; /* Align the text content to the left */
-    position: relative;
-    z-index: 1; /* Ensure content is above the grid lines */
+    max-width: 100%;
+    padding-left: 20px;
   }
-  
-  .vr-content h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .vr-container {
+    padding: 20px 20px 20px 30px;
   }
-  
-  .vr-content p {
-    margin: 20px 0;
-    font-size: 1.2rem;
+
+  .progress-bar-container {
+    left: 5px;
+    height: 60vh;
+    top: 20%;
   }
+}
+
+
+.VR-Book{
   
-  /* Button Styling */
-  .vr-buttons {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  .vr-signup {
-    padding: 15px 30px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: transparent;
-    border: 2px solid #9333ea;
-    border-radius: 50px;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s ease;
-  }
-  
-  .vr-signup::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(147, 51, 234, 0.5), rgba(255, 255, 255, 0.2));
-    z-index: -1;
-    filter: blur(15px);
-    animation: moving-border 3s infinite;
-  }
-  
-  @keyframes moving-border {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-  
-  .vr-signup:hover {
-    background-color: #9333ea;
-    color: white;
-  }
-  
-  /* Responsive Layout */
-  @media (max-width: 768px) {
-    .vr-container {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .progress-bar-vertical {
-      margin-bottom: 20px;
-    }
-  
-    .vr-content h1 {
-      font-size: 2.5rem;
-    }
-  
-    .vr-container::before {
-      width: 100%; /* Cover full width on smaller screens */
-    }
-  }
-  
+  margin-top: 10px;
+}
+
+.VR-Book P:hover{
+  color: #9333ea;
+}

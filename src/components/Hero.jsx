@@ -1,100 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Button, Card } from 'antd';
+import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../styles/hero.css';
-import heroImage from '../assets/vr.png'; // Ensure the correct image path
-import Header from './Header';
 
 const Hero = () => {
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const controls = useAnimation();
+  const { ref, inView } = useInView({ triggerOnce: true });
+  const navigate = useNavigate(); // Initialize the navigation function
 
-  const { ref: imageRef, inView: imageInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
-
-  const { ref: cardRef, inView: cardInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
-
-  const { ref: heroRef, inView: heroInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.1, // When Hero component is in view, we set it to true
-  });
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      setCursorPos({ x: event.clientX, y: event.clientY });
-    };
-
-    if (heroInView) {
-      window.addEventListener('mousemove', handleMouseMove);
-    } else {
-      window.removeEventListener('mousemove', handleMouseMove);
+  // Trigger animation when in view
+  React.useEffect(() => {
+    if (inView) {
+      controls.start({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1, ease: 'easeOut' },
+      });
     }
+  }, [inView, controls]);
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [heroInView]); // Only add/remove the mousemove listener when the Hero component is in view
+  // Handle button click and navigate to another page
+  const handleNavigate = () => {
+    navigate('/Plans'); // Adjust the route to your target page
+  };
 
   return (
-    <div>
-      <Header />
-      <div ref={heroRef} className="hero-container">
-        <Row gutter={16} align="middle">
-          <Col xs={24} md={12}>
-            <div
-              ref={imageRef}
-              className={`interactive-image ${imageInView ? 'fadeInLeft' : 'initial'}`}
-            >
-              <img src={heroImage} alt="VR Education" className={`hero-image ${imageInView ? 'slideIn' : 'initial'}`} />
-            </div>
-          </Col>
-          <Col xs={24} md={12}>
-            <Card
-              ref={cardRef}
-              className={`hero-content-card ${cardInView ? 'fadeInRight' : 'initial'}`}
-              hoverable
-            >
-              <h1 className="hero-title">Welcome to Verve</h1>
-              <p className="hero-description">
-                Redefining the educational landscape through Virtual Reality, offering immersive learning experiences for students and revolutionizing how tests are conducted.
-              </p>
-              <Button type="primary" size="large" className="cta-button">
-                Learn More
-              </Button>
-            </Card>
-          </Col>
-        </Row>
-        {heroInView && ( // Only render the color spot when Hero is in view
-          <div
-            className="color-spot"
-            style={{
-              left: cursorPos.x,
-              top: cursorPos.y,
-            }}
-          ></div>
-        )}
+    <div className='hero'>
+      <div className='meteor-container'>
+        {Array.from({ length: 20 }).map((_, index) => (
+          <div key={index} className='meteor'></div>
+        ))}
       </div>
-      <style jsx>{`
-        .hero-container {
-          position: relative;
-          overflow: hidden;
-        }
-        .color-spot {
-          position: fixed;
-          width: 1000px;
-          height: 1000px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(24, 144, 255, 0.2) 0%, rgba(24, 144, 255, 0) 70%);
-          pointer-events: none;
-          z-index: 1;
-          transform: translate(-50%, -50%);
-          transition: left 0.1s ease-out, top 0.1s ease-out;
-        }
-      `}</style>
+
+      <div className='hero-content'>
+        <motion.h1
+          ref={ref}
+          initial={{ opacity: 0, y: -50 }}
+          animate={controls}
+        >
+          Welcome to Verve
+        </motion.h1>
+
+        <motion.p
+          ref={ref}
+          initial={{ opacity: 0, y: -50 }}
+          animate={controls}
+          transition={{ delay: 0.2 }}
+        >
+          The Future of Education
+        </motion.p>
+
+        <motion.p
+          ref={ref}
+          initial={{ opacity: 0, y: -50 }}
+          animate={controls}
+          transition={{ delay: 0.4 }}
+        >
+          Now experience the amazing potential of Virtual Reality in your classrooms with our V-Class.
+        </motion.p>
+
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={controls}
+          transition={{ delay: 0.6 }}
+          className='button-container'
+        >
+          <motion.button 
+            whileHover={{ scale: 1.1 }} 
+            whileTap={{ scale: 0.9 }} 
+            onClick={handleNavigate} // Add navigation handler here
+          >
+          Explore  V-Class
+          </motion.button>
+        </motion.div>
+      </div>
     </div>
   );
 };

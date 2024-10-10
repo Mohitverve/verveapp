@@ -1,0 +1,80 @@
+/* src/components/LoadingScreen.css */
+
+/* Add fade-in for the text */
+@keyframes fadeInText {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Add fade-out animation */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px); /* Optional: move down slightly */
+    }
+  }
+  
+  .loading-screen {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .loading-screen.fade-out {
+    animation: fadeOut 0.8s forwards ease-in-out;
+  }
+  
+  .loading-screen h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    animation: fadeInText 1.5s forwards ease-in-out;
+  }
+  
+  @media (max-width: 768px) {
+    .loading-screen h1 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .loading-screen h1 {
+      font-size: 2rem;
+    }
+  }
+  .loading-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    pointer-events: none;
+  }  

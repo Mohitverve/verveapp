@@ -1,133 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-
-.hero-container {
-  background: linear-gradient(135deg, #0d1117 0%, #0d1117 100%);
-  padding: 50px;
+.hero {
+  position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: #0d1117;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+  linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  font-family: Poppins, sans-serif;
+  color: #fff;
   overflow: hidden;
-  position: relative;
 }
 
-.hero-container::before, 
-.hero-container::after {
-  content: '';
+.meteor-container {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0; /* Ensure grid is behind the content */
-  background-size: 20px 20px; /* Adjust size of the grid */
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Ensure meteors don't interfere with other elements */
+  z-index: 0;
 }
 
-.hero-container::before {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+/* Meteor styling */
+.meteor {
+  position: absolute;
+  top: -50px;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(white, transparent); /* Simple linear gradient */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* Light glow around meteor */
+  border-radius: 50%;
+  opacity: 0;
+  animation: fall 4s linear infinite;
 }
 
-.hero-container::after {
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  animation: moveLines 10s linear infinite; /* Add animation to move lines */
-}
-
-@keyframes moveLines {
+/* Keyframes for meteor falling */
+@keyframes fall {
   0% {
-    transform: translateY(0);
+    transform: translateY(0) rotate(15deg);
+    opacity: 1;
   }
   100% {
-    transform: translateY(-20px); /* Adjust this value based on grid size */
+    transform: translateY(100vh) translateX(10vw) rotate(15deg); /* Meteor movement */
+    opacity: 0;
   }
 }
 
-.interactive-image {
+/* Reduce the number of meteors and their randomness */
+.meteor:nth-child(1) { animation-duration: 3s; left: 10%; }
+.meteor:nth-child(2) { animation-duration: 3.5s; left: 30%; }
+.meteor:nth-child(3) { animation-duration: 4s; left: 50%; }
+.meteor:nth-child(4) { animation-duration: 4.5s; left: 70%; }
+.meteor:nth-child(5) { animation-duration: 5s; left: 90%; }
+
+
+
+/* Increase the variation of diagonal falling by changing translateX values */
+.meteor:nth-child(2n) { animation-duration: 3s; left: 15%; transform: translateX(20px); }
+.meteor:nth-child(3n) { animation-duration: 4s; left: 30%; transform: translateX(-20px); }
+.meteor:nth-child(4n) { animation-duration: 6s; left: 45%; transform: translateX(30px); }
+.meteor:nth-child(5n) { animation-duration: 7s; left: 60%; transform: translateX(-30px); }
+.meteor:nth-child(6n) { animation-duration: 8s; left: 75%; transform: translateX(40px); }
+
+/* Additional tweaks for smooth falling animation */
+.meteor {
+  opacity: 0;
+  animation: fall 6s ease-in-out infinite; /* Added ease-in-out for smoother appearance */
+}
+
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+  z-index: 1; /* Ensure content is above the meteors */
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #b3b3b3;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: #ffffffb3;
+}
+
+.hero-content .button-container {
   display: flex;
   justify-content: center;
-  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-  position: relative;
-  z-index: 1; /* Ensure it’s above the grid */
-}
-
-.hero-image {
+  margin-top: 20px;
   width: 100%;
-  max-width: 450px;
-  transition: transform 0.5s ease;
 }
 
-.hero-image:hover {
-  transform: scale(1.1);
-}
-
-.hero-content-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-  z-index: 1; /* Ensure it’s above the grid */
-}
-
-.hero-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3.5rem; /* Increase font size */
-  font-weight: 700;  /* Make it bolder */
-  background: linear-gradient(90deg, #8e8e8e, #bfbfbf); /* Apply a greyish gradient */
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent; /* Gradient text effect */
-  margin-bottom: 20px;
-  line-height: 1.2; /* Adjust line-height for better spacing */
-  text-transform: uppercase; /* Optionally make the text uppercase */
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Add subtle text shadow for depth */
-}
-
-
-.hero-description {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.2rem;
-  color: #ccc;
-  margin-bottom: 30px;
-}
-
-.cta-button {
-  background-color: #1890ff;
-  border: none;
+.hero-content button {
+  background-color: #2a63f0;
+  color: #fff;
   padding: 10px 20px;
-  font-size: 1.2rem;
-  font-family: 'Poppins', sans-serif;
-  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  max-width: 200px;
 }
 
-.cta-button:hover {
-  background-color: #40a9ff;
+.hero-content button:hover {
+  background-color: #3a73ff;
 }
-
-/* Animation classes */
-.fadeInLeft {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.fadeInRight {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.slideIn {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Initial state before animation */
-.initial {
-  opacity: 0;
-  transform: translateX(-100px); /* For image */
-}
-
-.hero-image.initial {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  background-image: radial-gradient(circle, #333 dotted 1px, transparent 1px), 
+                    linear-gradient(#333 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.booking-form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
