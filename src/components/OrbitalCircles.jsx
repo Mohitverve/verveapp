@@ -27,4 +27,4 @@ const OrbitalCircles = () => {
   );
 };
 
-export default OrbitalCircles;
+export default React.memo(OrbitalCircles);

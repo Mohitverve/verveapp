@@ -1,9 +1,11 @@
 // src/App.js
-import React from 'react';
-import Attendance from '../components/Attendance';
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import React, { Suspense, lazy } from 'react';
+import { CssBaseline, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
 import '@fontsource/poppins';
-import AppHeader from '../components/Header'
+import AppHeader from '../components/Header';
+
+// Dynamically import the Attendance component
+const Attendance = lazy(() => import('../components/Attendance'));
 
 const theme = createTheme({
   typography: {
@@ -24,8 +26,10 @@ const Employee = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppHeader/>
-      <Attendance />
+      <AppHeader />
+      <Suspense fallback={<CircularProgress />}>
+        <Attendance />
+      </Suspense>
     </ThemeProvider>
   );
 };

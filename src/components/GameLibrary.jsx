@@ -84,4 +84,4 @@ const styles = {
   },
 };
 
-export default GameLibrary;
+export default React.memo(GameLibrary);

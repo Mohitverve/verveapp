@@ -1,80 +1,36 @@
-/* src/components/LoadingScreen.css */
+/* Loading screen container */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff; /* Change this to match your theme */
+}
 
-/* Add fade-in for the text */
-@keyframes fadeInText {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Animated logo */
+.animated-logo {
+  width: 150px; /* Adjust size based on your logo */
+  height: 150px;
+  animation: pulse 2s infinite ease-in-out; /* Animation rule */
+}
+
+/* Keyframes for pulsing animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  
-  /* Add fade-out animation */
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(20px); /* Optional: move down slightly */
-    }
+  50% {
+    transform: scale(1.2); /* Increase size at 50% */
   }
-  
-  .loading-screen {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+  100% {
+    transform: scale(1);
   }
-  
-  .loading-screen.fade-out {
-    animation: fadeOut 0.8s forwards ease-in-out;
-  }
-  
-  .loading-screen h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    animation: fadeInText 1.5s forwards ease-in-out;
-  }
-  
-  @media (max-width: 768px) {
-    .loading-screen h1 {
-      font-size: 2.5rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .loading-screen h1 {
-      font-size: 2rem;
-    }
-  }
-  .loading-screen::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: 1;
-    pointer-events: none;
-  }  
+}
+
+/* Text animation, if you want to keep it */
+h1 {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}

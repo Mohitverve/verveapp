@@ -73,4 +73,4 @@
       );
     };
 
-    export default Future;
+    export default React.memo(Future);

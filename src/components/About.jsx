@@ -53,4 +53,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default React.memo(AboutUs);

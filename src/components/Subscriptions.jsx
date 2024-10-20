@@ -58,4 +58,4 @@ const Subscriptions = () => {
   );
 };
 
-export default Subscriptions;
+export default React.memo(Subscriptions);

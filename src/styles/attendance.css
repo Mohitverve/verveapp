@@ -1,0 +1,11 @@
+.Attendance {
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }

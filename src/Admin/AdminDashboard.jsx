@@ -1,20 +1,34 @@
 import React, { useEffect, useState, useMemo, useCallback, Suspense } from 'react';
-import { Grid, Typography, Card, CardContent } from '@mui/material';
-import { Table, Statistic, Modal, Input, Form, Spin } from 'antd';
-import { BarChartOutlined, UsergroupAddOutlined, ShoppingCartOutlined, PlayCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { Typography, Grid } from '@mui/material';
+import { Table, Modal, Input, Form, Spin } from 'antd';
+import { BarChartOutlined, UsergroupAddOutlined, ShoppingCartOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { collection, getDocs, onSnapshot, query, where, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../components/firebase';
-import '../styles/admin.css';
 import GameUploadForm from './GameUploadForm';
+import '../styles/admin.css';
+import { motion } from 'framer-motion';
+
+
+const StatCard = ({ title, value, icon, color }) => (
+  <div className="stat-card">
+    <div className="stat-icon" style={{ backgroundColor: color }}>
+      {icon}
+    </div>
+    <div className="stat-content">
+      <h3>{value}</h3>
+      <p>{title}</p>
+    </div>
+  </div>
+);
 
 const AdminDashboard = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [completedRequests, setCompletedRequests] = useState([]);
-  const [gamesListed, setGamesListed] = useState([]);  // This holds games uploaded
+  const [gamesListed, setGamesListed] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalSessions, setTotalSessions] = useState(0);
   const [totalDeliveryPartners, setTotalDeliveryPartners] = useState(0);
-  const [totalGamesUploaded, setTotalGamesUploaded] = useState(0);  // New state for total games uploaded
+  const [totalGamesUploaded, setTotalGamesUploaded] = useState(0);
   const [attendanceData, setAttendanceData] = useState([]);
   const [leaveData, setLeaveData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,14 +41,14 @@ const AdminDashboard = () => {
       const [totalSessionsSnapshot, deliveryPartnersSnapshot, gamesSnapshot, attendanceSnapshot, leaveSnapshot] = await Promise.all([
         getDocs(collection(db, 'bookings')),
         getDocs(collection(db, 'DeliveryPartners')),
-        getDocs(collection(db, 'Games')),  // Fetch games uploaded
+        getDocs(collection(db, 'Games')),
         getDocs(collection(db, 'attendance')),
         getDocs(collection(db, 'leaves')),
       ]);
 
       setTotalSessions(totalSessionsSnapshot.size);
       setTotalDeliveryPartners(deliveryPartnersSnapshot.size);
-      setTotalGamesUploaded(gamesSnapshot.size);  // Set total games uploaded
+      setTotalGamesUploaded(gamesSnapshot.size);
 
       setAttendanceData(attendanceSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       setLeaveData(leaveSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
@@ -134,44 +148,52 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      <Typography variant="h4" gutterBottom>
-        Admin Dashboard
-      </Typography>
-      <Grid container spacing={3}>
+    <motion.h1
+          className="dashboard-header"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+         Admin Dashboard 
+        </motion.h1>
+      <Grid container spacing={3} className="stats-container">
         <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Statistic title="Total Sessions" value={totalSessions} prefix={<BarChartOutlined />} />
-            </CardContent>
-          </Card>
+          <StatCard 
+            title="Total Sessions" 
+            value={totalSessions} 
+            icon={<BarChartOutlined />} 
+            color="#4361ee"
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Statistic title="Delivery Partners" value={totalDeliveryPartners} prefix={<UsergroupAddOutlined />} />
-            </CardContent>
-          </Card>
+          <StatCard 
+            title="Delivery Partners" 
+            value={totalDeliveryPartners} 
+            icon={<UsergroupAddOutlined />} 
+            color="#3a0ca3"
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Statistic title="Games Uploaded" value={totalGamesUploaded} prefix={<ShoppingCartOutlined />} />  {/* Updated to show games uploaded */}
-            </CardContent>
-          </Card>
+          <StatCard 
+            title="Games Uploaded" 
+            value={totalGamesUploaded} 
+            icon={<ShoppingCartOutlined />} 
+            color="#7209b7"
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Statistic title="Completed Requests" value={completedRequests.length} prefix={<CheckCircleOutlined />} />
-            </CardContent>
-          </Card>
+          <StatCard 
+            title="Completed Requests" 
+            value={completedRequests.length} 
+            icon={<CheckCircleOutlined />} 
+            color="#4cc9f0"
+          />
         </Grid>
       </Grid>
-      <div className='game'>
-      <GameUploadForm/>
 
+      <div className='game'>
+        <GameUploadForm />
       </div>
-    
 
       <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
         Pending Requests

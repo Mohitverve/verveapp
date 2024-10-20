@@ -71,4 +71,4 @@ const OurServices = () => {
   );
 };
 
-export default OurServices;
+export default React.memo(OurServices);
