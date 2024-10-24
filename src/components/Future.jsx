@@ -54,7 +54,7 @@
 
           {/* VR Content */}
           <div className="vr-content">
-            <h1>
+            <h1 className="future-head">
               VR is the Future <br />
               of Education
             </h1>

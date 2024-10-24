@@ -4,6 +4,7 @@ import './App.css';  // Import your CSS file
 import LoadingScreen from './components/LoadingScreen';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './components/firebase';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 // Dynamically import the components
 const Home = lazy(() => import('./pages/Home'));
@@ -72,6 +73,8 @@ const App = () => {
             <Route path="/VClass" element={<VClass />} />
             <Route path="/Form" element={<Form />} />
             <Route path="/Request" element={<Request />} />
+            <Route path="/PrivacyPolicy" element={<PrivacyPolicy
+             />} />
             
             {/* Protect Employee route with Employee Check */}
             <Route 

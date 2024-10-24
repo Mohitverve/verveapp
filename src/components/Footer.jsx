@@ -50,6 +50,13 @@ const Footer = () => {
           >
             Contact
           </Link>
+          <Link 
+            to="/PrivacyPolicy" 
+            onClick={() => handleNavigation('/PrivacyPolicy')} 
+            className="footer-link"
+          >
+            Privacy Policy
+          </Link>
         </div>
 
         <div className="footer-social">

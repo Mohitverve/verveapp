@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "710418840373",
+    "project_id": "verve-innovations",
+    "storage_bucket": "verve-innovations.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710418840373:android:d55dd0060188a817662a7c",
+        "android_client_info": {
+          "package_name": "com.verveuni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtWrOJdRlEIZ0s8gozFuOVCz8o9PfKAC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+{
+  "appId": "com.verveuni",
+  "appName": "Verve",
+  "webDir": "dist",
+  "android": {
+    "googleServicesFile": "./android/app/google-services.json"
+  }
+}

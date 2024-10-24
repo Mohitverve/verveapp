@@ -9,6 +9,18 @@
   align-items: center;
 }
 
+.future-head{
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #8e8e8e, #bfbfbf);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 20px;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
+
 .progress-bar-container {
   position: absolute;
   top: 10%;

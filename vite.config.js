@@ -2,9 +2,34 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { VitePWA } from 'vite-plugin-pwa'; // Import the PWA plugin
 
 export default defineConfig({
-  plugins: [react(), visualizer()],
+  plugins: [
+    react(),
+    visualizer(),
+    VitePWA({ // Add PWA configuration here
+      registerType: 'autoUpdate', // Auto updates the service worker
+      manifest: {
+        name: 'My Awesome App',
+        short_name: 'AwesomeApp',
+        description: 'An awesome app made with Vite, React, and Firebase',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
