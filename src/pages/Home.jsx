@@ -2,9 +2,14 @@ import React, { Suspense, lazy } from 'react';
 
 // Dynamically import the components
 const AppHeader = lazy(() => import('../components/Header'));
-
+const Hero = lazy(() => import('../components/Hero'));
+const About = lazy(() => import('../components/About'));
+const OurServices = lazy(() => import('../components/OurServices'));
+const Future = lazy(() => import('../components/Future'));
 const Footer = lazy(() => import('../components/Footer'));
-const Bookings = lazy(() => import('../components/Bookings'));
+const Contact = lazy(() => import('../components/Contact'));
+
+
 
 
 const Home = () => {
@@ -12,7 +17,12 @@ const Home = () => {
     <div>
       <Suspense fallback={<div>Loading...</div>}>
         <AppHeader />
-        <Bookings/>
+<Hero/>
+<About/>
+<OurServices/>
+<Future/>
+<Contact/>
+<Footer/>
       </Suspense>
     </div>
   );
