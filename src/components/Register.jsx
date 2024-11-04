@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Card, Typography, Divider, message, Input, Spin } from 'antd';
-import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import { auth } from './firebase';
+import { Button, Card, Typography, Divider, message, Input, Radio } from 'antd';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from './firebase'; // Make sure Firestore is imported
 import { useNavigate } from 'react-router-dom';
+import { doc, setDoc } from 'firebase/firestore'; // For saving data in Firestore
 
 import logo from '../assets/vervelogo.png';
 import '../styles/register.css';
@@ -17,21 +14,49 @@ const Register = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState(''); // Added name field for normal users
+  const [contactNumber, setContactNumber] = useState(''); // Added contact number field for normal users
   const [isLogin, setIsLogin] = useState(false); // Toggle between signup and login
   const [loading, setLoading] = useState(false); // Loading state
+  const [accountType, setAccountType] = useState('user'); // Account type ('user' or 'organization')
+  
+  // Organization-specific fields
+  const [institutionName, setInstitutionName] = useState('');
+  const [contactPerson, setContactPerson] = useState('');
 
   // Handle email and password sign-up
   const handleEmailSignUp = async () => {
-    if (!email || !password) {
-      message.error('Please enter both email and password.');
+    if (!email || !password || !name || !contactNumber) {
+      message.error('Please fill in all fields.');
       return;
     }
     
     setLoading(true); // Start loading
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User registered with email:', userCredential.user);
-      message.success('Successfully registered!');
+      const user = userCredential.user;
+
+      // Save user or organization details in Firestore
+      if (accountType === 'organization') {
+        // Save organization details
+        await setDoc(doc(db, 'institutions', user.uid), {
+          institutionName,
+          contactPerson,
+          contactNumber,
+          email,
+        });
+        message.success('Organization account created successfully!');
+      } else {
+        // Save normal user details
+        await setDoc(doc(db, 'users', user.uid), {
+          name,
+          contactNumber,
+          email,
+        });
+        message.success('User account created successfully!');
+      }
+
+      console.log('User registered with email:', user);
       navigate('/Home');
     } catch (error) {
       message.error(`Failed to register: ${error.message}`);
@@ -69,7 +94,22 @@ const Register = () => {
           {isLogin ? 'Log in to your account' : 'Join the revolution'}
         </Text>
         <Divider />
-        
+
+        {/* Select account type */}
+        {!isLogin && (
+          <>
+            <Radio.Group
+              onChange={(e) => setAccountType(e.target.value)}
+              value={accountType}
+              style={{ marginBottom: 10 }}
+            >
+              <Radio value="user">Normal User</Radio>
+              <Radio value="organization">Organization</Radio>
+            </Radio.Group>
+            <Divider />
+          </>
+        )}
+
         {/* Email and Password Input Fields */}
         <Input
           placeholder="Email"
@@ -83,6 +123,48 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           style={{ marginBottom: 10 }}
         />
+
+        {/* Additional Fields for Normal Users */}
+        {accountType === 'user' && !isLogin && (
+          <>
+            <Input
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{ marginBottom: 10 }}
+            />
+            <Input
+              placeholder="Contact Number"
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+              style={{ marginBottom: 10 }}
+            />
+          </>
+        )}
+
+        {/* Organization Fields */}
+        {accountType === 'organization' && !isLogin && (
+          <>
+            <Input
+              placeholder="Institution Name"
+              value={institutionName}
+              onChange={(e) => setInstitutionName(e.target.value)}
+              style={{ marginBottom: 10 }}
+            />
+            <Input
+              placeholder="Contact Person"
+              value={contactPerson}
+              onChange={(e) => setContactPerson(e.target.value)}
+              style={{ marginBottom: 10 }}
+            />
+            <Input
+              placeholder="Contact Number"
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+              style={{ marginBottom: 10 }}
+            />
+          </>
+        )}
 
         {/* Toggle between Sign-Up and Log-In */}
         {isLogin ? (

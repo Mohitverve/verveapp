@@ -97,3 +97,17 @@
     color: black;
   }
 }
+
+
+/* header.css */
+
+.delete-account-button {
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Optional: Set hover style for a subtle effect */
+.delete-account-button:hover {
+  background-color: #ff4d4f; /* Red background to indicate danger */
+  color: white;
+}

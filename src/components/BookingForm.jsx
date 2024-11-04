@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Box, Typography, Paper, Stepper, Step, StepLabel, Select, MenuItem, InputLabel, FormControl, Modal, IconButton } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Modal,
+  IconButton,
+} from '@mui/material';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from './firebase'; // Ensure your Firebase config is correctly set up
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -132,7 +147,7 @@ const BookingForm = () => {
 
   const reverseGeocode = async (latitude, longitude) => {
     try {
-      const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=22ffc993cf6144cc914040c3a7bb3bdc`);
+      const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`);
   
       if (response.data && response.data.results && response.data.results.length > 0) {
         const components = response.data.results[0].components;
@@ -149,15 +164,10 @@ const BookingForm = () => {
         alert('Location details could not be fetched.');
       }
     } catch (error) {
-      // Log full error details to the console
-      console.error('Error fetching reverse geocode:', error.toJSON()); // .toJSON() gives more details on the error
+      console.error('Error fetching reverse geocode:', error);
       alert('Unable to fetch location. Please try again.');
     }
   };
-  
-  
-  
-  
 
   const updateTotalPrice = debounce(() => {
     const total = formData.numberOfStudents * pricePerStudent;
@@ -288,13 +298,9 @@ const BookingForm = () => {
                   error={!!errors.address}
                   helperText={errors.address}
                 />
-                <Button onClick={fetchLocation} variant="contained" sx={{ mt: 2 }}>
-                  Fetch Location
-                </Button>
                 <FormControl fullWidth margin="normal" required error={!!errors.schoolType}>
-                  <InputLabel id="school-type-label">School Type</InputLabel>
+                  <InputLabel>School Type</InputLabel>
                   <Select
-                    labelId="school-type-label"
                     name="schoolType"
                     value={formData.schoolType}
                     onChange={handleSchoolTypeChange}
@@ -304,9 +310,11 @@ const BookingForm = () => {
                     <MenuItem value="college">College</MenuItem>
                   </Select>
                 </FormControl>
+                <Button variant="contained" color="primary" onClick={fetchLocation}>
+                  Use My Location
+                </Button>
               </>
             )}
-
             {activeStep === 1 && (
               <>
                 <TextField
@@ -341,11 +349,11 @@ const BookingForm = () => {
                   onChange={handleChange}
                   margin="normal"
                   required
+                  error={!!errors.date}
+                  helperText={errors.date}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  error={!!errors.date}
-                  helperText={errors.date}
                 />
                 <TextField
                   fullWidth
@@ -356,11 +364,11 @@ const BookingForm = () => {
                   onChange={handleChange}
                   margin="normal"
                   required
+                  error={!!errors.time}
+                  helperText={errors.time}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  error={!!errors.time}
-                  helperText={errors.time}
                 />
                 <TextField
                   fullWidth
@@ -372,70 +380,54 @@ const BookingForm = () => {
                   multiline
                   rows={3}
                 />
-                <Typography variant="h6" sx={{ mt: 2 }}>
-                  Total Price: ₹{formData.totalPrice}
-                </Typography>
-                <Button onClick={handleOpenModal} variant="outlined" sx={{ mt: 1 }}>
+                <Button variant="outlined" onClick={handleOpenModal}>
                   View Price Breakdown
                 </Button>
               </>
             )}
-
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                variant="contained"
-                sx={{ mr: 2 }}
-              >
+              <Button disabled={activeStep === 0} onClick={handleBack}>
                 Back
               </Button>
-              {isLastStep ? (
-                <Button type="submit" variant="contained" color="primary">
-                  Submit
-                </Button>
-              ) : (
-                <Button onClick={handleNext} variant="contained" color="primary">
-                  Next
-                </Button>
-              )}
+              <Button variant="contained" onClick={isLastStep ? handleSubmit : handleNext}>
+                {isLastStep ? 'Submit' : 'Next'}
+              </Button>
             </Box>
           </Box>
-        </Paper>
 
-        {/* Price Breakdown Modal */}
-        <Modal open={isModalOpen} onClose={handleCloseModal}>
-          <Paper
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              padding: 4,
-              maxWidth: 400,
-              width: '100%',
-            }}
-          >
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-              <Typography variant="h6">Price Breakdown</Typography>
-              <IconButton onClick={handleCloseModal}>
+          <Modal open={isModalOpen} onClose={handleCloseModal}>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 400,
+                bgcolor: 'background.paper',
+                boxShadow: 24,
+                p: 4,
+                borderRadius: 2,
+              }}
+            >
+              <IconButton
+                onClick={handleCloseModal}
+                sx={{ position: 'absolute', top: 10, right: 10 }}
+              >
                 <CloseIcon />
               </IconButton>
+              <Typography variant="h6">Price Breakdown</Typography>
+              <Typography>
+                Price per Student: ₹{pricePerStudent}
+              </Typography>
+              <Typography>
+                Number of Students: {formData.numberOfStudents}
+              </Typography>
+              <Typography variant="h6">
+                Total Price: ₹{formData.totalPrice}
+              </Typography>
             </Box>
-            <Typography variant="body1">
-              Price per Student: ₹{pricePerStudent}
-            </Typography>
-            <Typography variant="body1" sx={{ mt: 1 }}>
-              Number of Students: {formData.numberOfStudents}
-            </Typography>
-            <Typography variant="h6" sx={{ mt: 2 }}>
-              Total Price: ₹{formData.totalPrice}
-            </Typography>
-            <Button onClick={handleCloseModal} variant="contained" fullWidth sx={{ mt: 3 }}>
-              Close
-            </Button>
-          </Paper>
-        </Modal>
+          </Modal>
+        </Paper>
       </Box>
     </ThemeProvider>
   );
