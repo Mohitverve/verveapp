@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* Updated header.css */
 
 .app-header {
   background-color: #0d1117;
@@ -6,23 +6,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
-}
-
-.signout-button {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
-  padding: 5px 15px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.signout-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.8);
-  color: #fff;
-  transform: translateY(-2px);
 }
 
 .logo {
@@ -33,10 +16,10 @@
   margin-right: auto;
 }
 
+/* Menu Items */
 .menu-items {
   background: transparent;
   border-bottom: none;
-  display: none; /* Default for mobile */
 }
 
 .menu-items .ant-menu-item {
@@ -47,27 +30,38 @@
   color: #0f3350;
 }
 
-.menu-icon {
-  display: none;
-  font-size: 24px;
+/* Sign Out and Delete Account Buttons */
+.signout-button,
+.delete-account-button {
+  background: transparent;
   color: #fff;
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  margin-left: 10px; /* Ensure some space between buttons */
+  transition: all 0.3s ease;
 }
 
-.mobile-drawer .ant-drawer-body {
-  padding: 0;
+.signout-button:hover,
+.delete-account-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
-.mobile-drawer .ant-menu {
-  border-right: none;
+.delete-account-button {
+  color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
 }
 
-@media (min-width: 769px) {
-  .menu-items {
-    display: flex !important; /* Ensure flex for larger screens */
-  }
+.delete-account-button:hover {
+  background-color: #ff4d4f;
+  color: white;
 }
 
+/* Mobile Specific Adjustments */
 @media (max-width: 768px) {
   .app-header {
     padding: 0 20px;
@@ -75,39 +69,35 @@
 
   .menu-icon {
     display: block;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
   }
 
-  .menu-items {
-    display: none;
-  }
-
-  .mobile-drawer .menu-items {
-    display: flex;
-    flex-direction: column;
-  }
-
+  /* Drawer Styles */
   .mobile-drawer .ant-menu-item {
-    margin: 0;
     height: 50px;
     line-height: 50px;
     color: #000;
   }
 
-  .signout-button {
-    color: black;
+  .signout-button,
+  .delete-account-button {
+    width: 100%; /* Full-width buttons for mobile drawer */
+    margin: 5px 0;
   }
 }
 
+/* Desktop View */
+@media (min-width: 769px) {
+  .menu-items {
+    display: flex;
+    align-items: center; /* Vertically align items */
+  }
 
-/* header.css */
-
-.delete-account-button {
-  color: white !important;
-  border-color: white !important;
-}
-
-/* Optional: Set hover style for a subtle effect */
-.delete-account-button:hover {
-  background-color: #ff4d4f; /* Red background to indicate danger */
-  color: white;
+  /* Adjust spacing for desktop buttons */
+  .signout-button,
+  .delete-account-button {
+    margin-left: 20px;
+  }
 }
