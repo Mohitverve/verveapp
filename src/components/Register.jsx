@@ -26,37 +26,32 @@ const Register = () => {
 
   // Handle email and password sign-up
   const handleEmailSignUp = async () => {
-    if (!email || !password || !name || !contactNumber) {
+    // Conditional validation based on account type
+    if (
+      !email ||
+      !password ||
+      (accountType === 'user' && (!name || !contactNumber)) ||
+      (accountType === 'organization' && (!institutionName || !contactPerson || !contactNumber))
+    ) {
       message.error('Please fill in all fields.');
       return;
     }
-    
+
     setLoading(true); // Start loading
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Save user or organization details in Firestore
-      if (accountType === 'organization') {
-        // Save organization details
-        await setDoc(doc(db, 'institutions', user.uid), {
-          institutionName,
-          contactPerson,
-          contactNumber,
-          email,
-        });
-        message.success('Organization account created successfully!');
-      } else {
-        // Save normal user details
-        await setDoc(doc(db, 'users', user.uid), {
-          name,
-          contactNumber,
-          email,
-        });
-        message.success('User account created successfully!');
-      }
+      // Save user details with a role
+      await setDoc(doc(db, 'users', user.uid), {
+        name: accountType === 'user' ? name : contactPerson,
+        contactNumber,
+        email,
+        role: accountType, // Add role to distinguish between user and organization
+        institutionName: accountType === 'organization' ? institutionName : null,
+      });
 
-      console.log('User registered with email:', user);
+      message.success(`${accountType === 'organization' ? 'Organization' : 'User'} account created successfully!`);
       navigate('/Home');
     } catch (error) {
       message.error(`Failed to register: ${error.message}`);
